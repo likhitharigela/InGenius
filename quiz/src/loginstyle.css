@@ -1,0 +1,50 @@
+.container {
+    background-image: url("./images/background.jpg");
+    background-size: cover;
+    height: 92.1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(240, 240, 240, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FAFAFA;
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .labelContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    font-size: 21px;
+    width: 120px;
+  }
+  
+  .inputField {
+    width: calc(100% - 120px);
+    padding: 10px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .button {
+    font-size: 18px;
+    width: calc(50% - 10px);
+    margin: 5px;
+  }
+  
