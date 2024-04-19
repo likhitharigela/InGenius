@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import backgroundImage from './images/background.jpg';
 
 const QuizComponent = () => {
   const { quizName } = useParams();
@@ -76,33 +77,90 @@ const QuizComponent = () => {
   }, [quizName]);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-      <div style={{ background: 'coral', padding: '30px', borderRadius: '10px', maxWidth: '600px', width: '100%' }}>
-        <div style={{ marginBottom: '25px' }}>
-          <p style={{ fontSize: '20px', textAlign: 'center' }}>{currentQuestion + 1}) {questions[currentQuestion]?.question}</p>
-        </div>
-        <div>
-          {questions[currentQuestion]?.options.map((option, i) => (
-            <div key={i} style={{ marginBottom: '10px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginLeft: '180px'}}>
-              <label style={{ flex: 1 }}>
-                <input
-                  type="radio"
-                  name={`q${currentQuestion}`}
-                  value={i + 1}
-                  checked={selectedOptions[questions[currentQuestion]._id] === `${i + 1}`}
-                  onChange={() => handleOptionChange(`${i + 1}`)}
-                />
-                <span style={{ marginLeft: '10px' }}>{i + 1}) {option}</span>
-              </label>
-            </div>
-          ))}
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
-          {currentQuestion > 0 && <button onClick={handlePrev} style={{ padding: '10px 20px' }}>Previous</button>}
-          {currentQuestion < questions.length - 1
-            ? <button onClick={handleNext} style={{ padding: '10px 20px', marginLeft: currentQuestion === 0 ? 'auto' : '' }}>Next</button>
-            : <button onClick={submitQuiz} style={{ padding: '10px 20px', marginLeft: currentQuestion === 0 ? 'auto' : '' }}>Submit</button>
+    <div>
+      <style>
+        {`
+          body {
+            background-image: url(${backgroundImage});
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Ensures background image covers entire viewport */
+            align-items: center;
           }
+
+          .QuestionContainer {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+          }
+          
+          .QuestionContainer p {
+            font-weight: bold;
+          }
+          
+
+          .OptionContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
+          }
+          
+          .OptionContainer div {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Changed to flex-start */
+            margin-left: 180px;
+          }
+          
+          .OptionContainer label {
+            flex: 1;
+            display: flex;
+            align-items: center;
+          }
+          
+          .OptionContainer input[type="radio"] {
+            margin-right: 10px; 
+          }
+
+          button {
+            padding: 10px 20px;
+          }
+        `}
+      </style>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        <div className='QuestionContainer'>
+          <div style={{ marginBottom: '25px' }}>
+            <p style={{ fontSize: '30px', textAlign: 'left' }}>{currentQuestion + 1}) {questions[currentQuestion]?.question}</p>
+          </div>
+          <div className='OptionContainer' style={{ fontSize: '20px', textAlign: 'left' }}>
+            {questions[currentQuestion]?.options.map((option, i) => (
+              <div key={i}>
+                <label>
+                  <input
+                    type="radio"
+                    name={`q${currentQuestion}`}
+                    value={i + 1}
+                    checked={selectedOptions[questions[currentQuestion]._id] === `${i + 1}`}
+                    onChange={() => handleOptionChange(`${i + 1}`)}
+                  />
+                  <span style={{ marginLeft: '5px' }}>{i + 1}) {option}</span>
+                </label>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+            {currentQuestion > 0 && <button onClick={handlePrev}>Previous</button>}
+            {currentQuestion < questions.length - 1
+              ? <button onClick={handleNext}>Next</button>
+              : <button onClick={submitQuiz}>Submit</button>
+            }
+          </div>
         </div>
       </div>
     </div>
