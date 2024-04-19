@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import backgroundImage from './images/background.jpg';
 
 const AddTest = () => {
   const [formData, setFormData] = useState({
@@ -56,91 +57,122 @@ const AddTest = () => {
   }
 
   return (
-    <div className="AddTestContainer" style={styles.addTestContainer}>
-      <h2>Add Test</h2>
-      <form className="Form" onSubmit={handleSubmit}>
-        <div className="FormGroup" style={styles.formGroup}>
-          <label>Quiz Name:</label>
-          <input
-            type="text"
-            name="quizName"
-            value={formData.quizName}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          />
-        </div>
-        <div className="FormGroup" style={styles.formGroup}>
-          <label>Question:</label>
-          <input
-            type="text"
-            name="question"
-            value={formData.question}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          />
-        </div>
-        <div className="FormGroup" style={styles.formGroup}>
-          <label>Options:</label>
-          {formData.options.map((option, index) => (
+    <div>
+      <style>
+        {`
+          body {
+            background-image: url(${backgroundImage});
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .AddTestContainer {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+          }
+          .FormGroup {
+            margin-bottom: 20px;
+          }
+          .FormGroup label {
+            font-weight: bold;
+          }
+          .FormGroup input,
+          .FormGroup select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 5px;
+          }
+          .FormGroup input[type="text"],
+          .FormGroup select {
+            margin-top: 5px;
+            
+          }
+          .FormGroup input[type="text"] {
+            margin-bottom: 5px;
+          }
+          button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #333333; 
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+          }
+          button:hover {
+            background-color: #45a049; 
+          }
+        `}
+      </style>
+      <div className="AddTestContainer">
+        <h2>Add Test</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="FormGroup">
+            <label>Quiz Name:</label>
             <input
               type="text"
-              value={option}
-              onChange={(e) => handleOptionChange(e, index)}
-              key={index}
+              name="quizName"
+              value={formData.quizName}
+              onChange={handleChange}
               required
-              style={styles.input}
             />
-          ))}
-        </div>
-        <div className="FormGroup" style={styles.formGroup}>
-          <label>Correct Option:</label>
-          <select
-            name="correctOption"
-            value={formData.correctOption}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          >
-            <option value={1}>Option A</option>
-            <option value={2}>Option B</option>
-            <option value={3}>Option C</option>
-            <option value={4}>Option D</option>
-          </select>
-        </div>
-        <button type="submit" style={styles.button}>Submit</button>
-      </form>
+          </div>
+          <div className="FormGroup">
+            <label>Question:</label>
+            <input
+              type="text"
+              name="question"
+              value={formData.question}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="FormGroup">
+            <label>Options:</label>
+            {formData.options.map((option, index) => (
+              <input
+                type="text"
+                value={option}
+                onChange={(e) => handleOptionChange(e, index)}
+                key={index}
+                required
+              />
+            ))}
+          </div>
+          <div className="FormGroup">
+            <label>Correct Option:</label>
+            <select
+              name="correctOption"
+              value={formData.correctOption}
+              onChange={handleChange}
+              required
+            >
+              <option value={1}>Option A</option>
+              <option value={2}>Option B</option>
+              <option value={3}>Option C</option>
+              <option value={4}>Option D</option>
+            </select>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default AddTest;
-
-const styles = {
-  addTestContainer: {
-    backgroundColor: 'pink',
-    padding: '20px',
-    borderRadius: '10px',
-    textAlign: 'center',
-    margin: 'auto',
-    width: '50%'
-  },
-  formGroup: {
-    marginBottom: '10px'
-  },
-  input: {
-    width: '100%',
-    padding: '8px',
-    borderRadius: '5px'
-  },
-  button: {
-    padding: '10px 20px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    backgroundColor: 'yellow',
-    color: 'green',
-    border: '2px solid green',
-    cursor: 'pointer'
-  }
-};

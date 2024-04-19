@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import backgroundImage from './images/background.jpg';
 
 const DeleteTest = () => {
   const [formData, setFormData] = useState({
@@ -42,49 +43,86 @@ const DeleteTest = () => {
   }
 
   return (
-    <div className="DeleteTestContainer" style={styles.deleteTestContainer}>
-      <h2>Delete Test</h2>
-      <form className="Form" onSubmit={handleDelete}>
-        <div className="FormGroup">
-          <label>Quiz Name:</label>
-          <input
-            type="text"
-            name="quizName"
-            value={formData.quizName}
-            onChange={handleChange}
-            required
-            style={styles.input}
-          />
-        </div>
-        <button type="submit" style={styles.button}>Delete Test</button>
-      </form>
+    <div>
+      <style>
+        {`
+          body {
+            background-image: url(${backgroundImage});
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .DeleteTestContainer {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+          }
+
+          .Form {
+            width: 300px;
+            text-align: center;
+          }
+
+          .FormGroup {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+          }
+
+          .FormGroup label {
+            font-weight: bold;
+            width: 120px;
+            margin-right: 10px;
+          }
+
+          .FormGroup input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+          }
+
+          button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #333333;
+            color: white;
+            transition: background-color 0.3s ease;
+          }
+
+          button:hover {
+            background-color: #45a049;
+          }
+        `}
+      </style>
+      <div className="DeleteTestContainer" >
+        <h2>Delete Test</h2>
+        <form className="Form" onSubmit={handleDelete}>
+          <div className="FormGroup">
+            <label>Quiz Name:</label>
+            <input
+              type="text"
+              name="quizName"
+              value={formData.quizName}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <button type="submit" >Delete Test</button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default DeleteTest;
-
-const styles = {
-  deleteTestContainer: {
-    backgroundColor: 'green',
-    padding: '20px',
-    borderRadius: '10px',
-    textAlign: 'center',
-    margin: 'auto',
-    width: '50%'
-  },
-  input: {
-    width: '100%',
-    padding: '8px',
-    borderRadius: '5px'
-  },
-  button: {
-    padding: '10px 20px',
-    fontSize: '16px',
-    borderRadius: '5px',
-    backgroundColor: 'white',
-    color: 'green',
-    border: '2px solid green',
-    cursor: 'pointer'
-  }
-};

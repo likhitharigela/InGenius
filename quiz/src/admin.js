@@ -1,58 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import AddTest from './add-test'
-import DeleteTest from './delete-test'
+import AddTest from './add-test';
+import DeleteTest from './delete-test';
+import backgroundImage from './images/background.jpg';
 
 const Admin = () => {
-  const handleDisplayTests = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/questions');
-      const data = await response.json();
-      console.log(data); // Log the retrieved quizzes
-    } catch (error) {
-      console.error('Error fetching quizzes:', error);
-    }
-  };
-
   return (
-    <div className="AdminContainer" style={styles.adminContainer}>
-      <h2>Welcome back, Admin!</h2>
-      <div className="Buttons" style={styles.buttonContainer}>
-        <Link to="/add-test">
-          <button className="Button" style={styles.button}>Add Test</button>
+    <div>
+      <style>
+        {`
+          body {
+            background-image: url(${backgroundImage});
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .AdminContainer {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+          }
+          .Buttons {
+            margin-top: 30px;
+          }
+          .Button {
+            padding: 10px 20px;
+            margin: 10px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #333333; 
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+          }
+          .Button:hover {
+            background-color: #45a049; 
+          }
+        `}
+      </style>
+      <div className="AdminContainer">
+        <h2>Welcome back, Admin!</h2>
+        <div className="Buttons">
+          <Link to="/add-test">
+            <button className="Button">Add Test</button>
+          </Link>
+          <Link to="/delete-test">
+            <button className="Button">Delete Test</button>
+          </Link>
+        </div>
+        <Link to="/">
+          <button className="Button">Log Out</button>
         </Link>
-        <Link to="/delete-test">
-          <button className="Button" style={styles.button}>Delete Test</button>
-        </Link>
-
-        
-        
       </div>
-      <Link to="/">
-          <button className="Button" style={styles.button}>Log Out</button>
-        </Link>
     </div>
   );
 };
 
 export default Admin;
-
-const styles = {
-  adminContainer: {
-    backgroundColor: 'green',
-    padding: '20px',
-    borderRadius: '10px',
-    textAlign: 'center',
-    margin: 'auto',
-    width: '50%',
-  },
-  buttonContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: '20px',
-  },
-  button: {
-    margin: '5px',
-    fontSize: '16px'
-  }
-};

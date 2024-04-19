@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import './loginstyle.css'; // Import the CSS file
-
-
-
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
@@ -61,46 +57,111 @@ function Login() {
     setFormData(prevState => ({ ...prevState, isRegistering: !prevState.isRegistering }));
   }
 
-
   return (
-    <div className="container">
-      <div className="formContainer">
-        <h2>{formData.isRegistering ? 'Register' : 'Login'}</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="labelContainer">
-            <label className="label">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="inputField"
-            />
-          </div>
-          <br />
-          <div className="labelContainer">
-            <label className="label">Password:</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="inputField"
-            />
-          </div>
-          <br />
-          <div className="buttonContainer">
-            <button className="button" id="login" type="submit">
-              {formData.isRegistering ? 'Register' : 'Login'}
-            </button>
-            <button className="button" id="register" type="button" onClick={toggleMode}>
-              {formData.isRegistering ? 'Switch to Login' : 'Switch to Register'}
-            </button>
-          </div>
-
-        </form>
+    <div>
+      <style>
+        {`
+          body {
+            background-image: url('./images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          }
+          .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+          }
+          .formContainer {
+            background-color: rgba(255, 255, 255, 0.4);
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+          }
+          .label {
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 8px;
+          }
+          .inputField {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+          }
+          .buttonContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+          }
+          .button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #333333;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+          }
+          .button:hover {
+            background-color: #555555;
+          }
+          .toggleButton {
+            border: none;
+            background: none;
+            color: #333333;
+            font-size: 14px;
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        `}
+      </style>
+      <div className="container">
+        <div className="formContainer">
+          <h1>{formData.isRegistering ? 'Register' : 'Login'}</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label className="label">Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="inputField"
+              />
+            </div>
+            <div>
+              <label className="label">Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="inputField"
+              />
+            </div>
+            <div className="buttonContainer">
+              <button className="button" type="submit">
+                {formData.isRegistering ? 'Register' : 'Login'}
+              </button>
+              <button className="toggleButton" type="button" onClick={toggleMode}>
+                {formData.isRegistering ? 'Switch to Login' : 'Switch to Register'}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
